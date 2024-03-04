@@ -1,0 +1,30 @@
+﻿@using myshop.Entities.Models
+@model ShoppingCart
+
+<form method="post" asp-action="Details" >
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-5"> 
+            <input hidden asp-for="@Model.ProductId" />
+         <div class="row gx-4 gx-lg-5 align-items-center">
+ 
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="~/@Model.products.Image" alt="..."width="400"height="500" /></div>
+            <div class="col-md-6">
+                <div class="small mb-1">@Html.Raw(@Model.products.category.Name)</div>
+               <h1 class="display-5 fw-bolder">@Model.products.Name</h1>
+                <div class="fs-5 mb-4">
+                    <span class="text-decoration-line-through"></span>
+                    <span>@Model.products.Price</span>
+                </div>
+                    <pre dir="rtl" style="overflow:hidden;  white-space: pre-wrap; " class=" lead">@Html.Raw(Model.products.Description)</pre>
+                <div class="d-flex">
+                    <input class="form-control text-center me-3" id="inputQuantity" asp-for="Counts" style="max-width: 3rem" />
+                    <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Add to cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</form>

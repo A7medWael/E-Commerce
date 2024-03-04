@@ -1,0 +1,67 @@
+﻿@using myshop.Entities.Models;
+@using myshop.Entities.ViewModels
+@model ProductVm
+@{
+    ViewBag.PageTitle = "product Management";
+    ViewBag.CardTitle = "Create product";
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+<div class="row">
+    <div class="col-md-4">
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="product.Name"></label>
+        <input type="text" asp-for="product.Name" class="form-control" />
+        <span asp-validation-for="product.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="product.Description"></label>
+                <textarea dir="rtl" id="textarea" asp-for="product.Description" class="form-control"></textarea>
+        <span asp-validation-for="product.Description" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="product.Price"></label>
+        <input asp-for="product.Price" class="form-control" />
+        <span asp-validation-for="product.Price" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="product.Image"></label>
+        <input type="file"  name="file" id="imgfile" class="form-control" onchange="filimg(event);" />
+    </div>
+    <div class="form-group">
+        <label asp-for="product.CategoryId"></label>
+        <select asp-for="product.CategoryId"class="form-control" asp-items="Model.CategoryList">
+            <option disabled selected>--Select Category</option>
+        </select>
+        <span asp-validation-for="product.Description" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Index" asp-controller="Category" class="btn btn-warning">Back To Index</a>
+    </div>
+</form>
+</div>
+
+    <div class="col-md-4">
+        <div class="container">
+            <img id="imgpreview" src="~/@Model.product.Image" width="300" height="300" />
+        </div>
+    </div>
+</div>
+@section scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // tinymce.init({
+        //     selector: '#textarea'
+        // });
+ 
+   
+        var filimg = function (event) {
+            var imgholder = document.getElementById("imgpreview");
+            imgholder.src = URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+}
